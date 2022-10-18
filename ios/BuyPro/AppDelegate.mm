@@ -27,6 +27,10 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 @end
 #endif
 
+#if RCT_DEV
+#import <React/RCTDevLoadingView.h>
+#endif
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -44,6 +48,10 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 #endif
 
   NSDictionary *initProps = [self prepareInitialProps];
+  #if RCT_DEV
+  [bridge moduleForClass:[RCTDevLoadingView class]];
+  #endif
+
   UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"BuyPro", initProps);
 
   if (@available(iOS 13.0, *)) {
